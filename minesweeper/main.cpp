@@ -8,14 +8,18 @@
 #include <SDL2/SDL.h>
 #include <random>
 #include <set>
+#include "grid.hpp"
 
 SDL_Window *win = NULL;
 SDL_Surface* screenSurface = NULL;
 SDL_Surface* tile_closed = NULL;
+SDL_Surface* tile_empty = NULL; // Blank tile
 SDL_Surface* tile_mine = NULL;
 SDL_Surface* number_tiles[9];
 
 int state[10][10];
+bool opened[10][10];
+std::set<int> mines;
 
 bool init() {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -39,8 +43,9 @@ bool init() {
 bool loadMedia() {
     tile_closed = SDL_LoadBMP("media/tile.bmp");
     tile_mine = SDL_LoadBMP("media/mine.bmp");
+    tile_empty = SDL_LoadBMP("media/empty.bmp");
     
-    if (tile_closed == NULL || tile_mine == NULL) {
+    if (tile_closed == NULL || tile_mine == NULL || tile_empty == NULL) {
         return false;
     }
     
@@ -63,12 +68,18 @@ void renderState() {
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
             pos = {i*50,j*50,50,50};
+            int linear_position =  (i+1)*(j+1);
             switch (state[i][j]) {
                 case 0:
                     SDL_BlitSurface(tile_closed, NULL, screenSurface, &pos);
                     break;
                 case 1:
-                    SDL_BlitSurface(tile_mine, NULL, screenSurface, &pos);
+                    if (mines.contains(linear_position)) {
+                        SDL_BlitSurface(tile_mine, NULL, screenSurface, &pos);
+                    } else {
+                        SDL_BlitSurface(tile_empty, NULL, screenSurface, &pos);
+                    }
+                    break;
                 default:
                     break;
             }
@@ -99,8 +110,9 @@ int main(int argc, const char * argv[]) {
     std::mt19937 gen(random());
     std::uniform_int_distribution<> distr(1,10*10);
     
+    Grid grid;
+    
     // Place mines
-    std::set<int> mines;
     for (int i = 0; i < 10; i++) {
         int mine_pos = distr(gen);
         mines.insert(mine_pos);
@@ -109,12 +121,7 @@ int main(int argc, const char * argv[]) {
     
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
-            int linear_position =  (i+1)*(j+1);
-            if (mines.contains(linear_position)) {
-                state[i][j] = 1;
-            } else {
-                state[i][j] = 0;
-            }
+            state[i][j] = 0;
         }
     }
     renderState();
@@ -137,6 +144,12 @@ int main(int argc, const char * argv[]) {
                 std::cout << "Mouse button down at: " << x << " " << y << std::endl;
                 std::cout << tile_x << " " << tile_y << std::endl;
                 std::cout << "There is a type of tile: " << state[tile_x][tile_y] << std::endl;
+                
+                if (state[tile_x][tile_y] != 1) {
+                    state[tile_x][tile_y] = 1;
+                    renderState();
+                    SDL_UpdateWindowSurface(win);
+                }
             }
         }
     }
