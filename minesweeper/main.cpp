@@ -53,32 +53,20 @@ bool loadMedia() {
     return true;
 }
 
-void renderGrid(int width, int height) {
-    SDL_Rect pos = {0,0,50,50};
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
-            pos = {i*50,j*50,50,50};
-            SDL_BlitSurface(tile_closed, NULL, screenSurface, &pos);
-        }
-    }
-}
-
-void renderState() {
+void renderState(Grid* g) {
     SDL_Rect pos = {0,0,50,50};
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
             pos = {i*50,j*50,50,50};
-            int linear_position =  (i+1)*(j+1);
-            switch (state[i][j]) {
+            switch (g->getTile(i,j)) {
                 case 0:
                     SDL_BlitSurface(tile_closed, NULL, screenSurface, &pos);
                     break;
                 case 1:
-                    if (mines.contains(linear_position)) {
-                        SDL_BlitSurface(tile_mine, NULL, screenSurface, &pos);
-                    } else {
-                        SDL_BlitSurface(tile_empty, NULL, screenSurface, &pos);
-                    }
+                    SDL_BlitSurface(tile_mine, NULL, screenSurface, &pos);
+                    break;
+                case 2:
+                    SDL_BlitSurface(tile_empty, NULL, screenSurface, &pos);
                     break;
                 default:
                     break;
@@ -97,6 +85,7 @@ std::pair<int, int> getTileLocationFromScreen(int x, int y){
     std::pair<int, int> result(x*10/250, y*10/250);
     return result;
 }
+
 int main(int argc, const char * argv[]) {
     // insert code here...
     init();
@@ -106,25 +95,11 @@ int main(int argc, const char * argv[]) {
         close();
         return 0;
     }
-    std::random_device random;
-    std::mt19937 gen(random());
-    std::uniform_int_distribution<> distr(1,10*10);
     
-    Grid grid;
+    Grid grid(10,10,10);
     
     // Place mines
-    for (int i = 0; i < 10; i++) {
-        int mine_pos = distr(gen);
-        mines.insert(mine_pos);
-        std::cout << mine_pos << " ";
-    }
-    
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-            state[i][j] = 0;
-        }
-    }
-    renderState();
+    renderState(&grid);
     // renderGrid(10, 10);
     SDL_UpdateWindowSurface(win);
     
@@ -140,16 +115,14 @@ int main(int argc, const char * argv[]) {
                 int y = winEvent.button.y;
                 int tile_x = getTileLocationFromScreen(x,y).first;
                 int tile_y = getTileLocationFromScreen(x,y).second;
+                                
+                grid.revealTile(tile_x, tile_y);
+                renderState(&grid);
+                SDL_UpdateWindowSurface(win);
                 
                 std::cout << "Mouse button down at: " << x << " " << y << std::endl;
                 std::cout << tile_x << " " << tile_y << std::endl;
-                std::cout << "There is a type of tile: " << state[tile_x][tile_y] << std::endl;
-                
-                if (state[tile_x][tile_y] != 1) {
-                    state[tile_x][tile_y] = 1;
-                    renderState();
-                    SDL_UpdateWindowSurface(win);
-                }
+                std::cout << "There is a type of tile: " << grid.getTile(tile_x, tile_y) << std::endl;
             }
         }
     }
