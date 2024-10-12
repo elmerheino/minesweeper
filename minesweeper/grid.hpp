@@ -23,6 +23,8 @@ private:
     void placeMines(int no_of_mines);
     void prepareState();
     void setTile(int row, int column, int value);
+    bool withinRange(int row, int col);
+    void revealTileRecursive(int row, int col);
 public:
     Grid(int width, int height, int no_of_mines);
     bool revealTile(int row, int column); // true if no mine, false is mine
