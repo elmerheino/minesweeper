@@ -18,11 +18,13 @@ SDL_Surface* tile_empty = NULL; // Blank tile
 SDL_Surface* tile_mine = NULL;
 SDL_Surface* number_tiles[9];
 
-int grid_width = 20;
-int grid_height = 10;
+int grid_width = 30;
+int grid_height = 20;
 
 int window_width = (grid_width/2)*50;
 int window_height = (grid_height/2)*50;
+
+bool game_over = false;
 
 bool init() {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -129,7 +131,14 @@ int main(int argc, const char * argv[]) {
                 int tile_x = getTileLocationFromScreen(x,y).first;
                 int tile_y = getTileLocationFromScreen(x,y).second;
                                 
-                grid.revealTile(tile_x, tile_y);
+                if (!game_over && grid.revealTile(tile_x, tile_y)) {
+                    // Game over
+                    std::cout << "Game over !!!" << std::endl;
+                    game_over = true;
+                    grid.revealAllMines();
+                    renderState(&grid);
+                    SDL_UpdateWindowSurface(win);
+                }
                 renderState(&grid);
                 SDL_UpdateWindowSurface(win);
                 

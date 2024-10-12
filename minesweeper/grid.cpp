@@ -135,3 +135,13 @@ bool Grid::revealTile(int row, int column) { // Returns true of there is a mine
     }
     return false;
 }
+
+void Grid::revealAllMines() {
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            if (hasMine(i, j)) {
+                setTile(i, j, 1);
+            }
+        }
+    }
+}

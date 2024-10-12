@@ -31,6 +31,7 @@ public:
     int getTile(int row, int column); // 0 unopened, 1 mine, 2 empty, 2+1 one mine around, 3+n n mines around
     bool hasMine(int row, int column);
     int minesAround(int row, int column);
+    void revealAllMines(); // Sets all tiles w/ a mine to 1
 };
 
 #endif /* grid_hpp */
