@@ -9,6 +9,7 @@
 #include <random>
 #include <set>
 #include "grid.hpp"
+#include <format>
 
 SDL_Window *win = NULL;
 SDL_Surface* screenSurface = NULL;
@@ -41,11 +42,18 @@ bool loadMedia() {
     tile_mine = SDL_LoadBMP("media/mine.bmp");
     tile_empty = SDL_LoadBMP("media/empty.bmp");
     
+    for (int i = 1; i <= 8; i++) {
+        std::string path = std::format("media/numberTile-{}.bmp",i);
+        std::cout << "Loading file: " << path << std::endl;
+        number_tiles[i] = SDL_LoadBMP(path.c_str());
+        if (number_tiles[i] == NULL) {
+            return false;
+        }
+    }
+    
     if (tile_closed == NULL || tile_mine == NULL || tile_empty == NULL) {
         return false;
     }
-    
-    
     return true;
 }
 
@@ -66,6 +74,10 @@ void renderState(Grid* g) {
                     break;
                 default:
                     break;
+            }
+            int tile_state = g->getTile(i,j) - 3;
+            if (tile_state <= 8 && tile_state >= 0) {
+                SDL_BlitSurface(number_tiles[tile_state], NULL, screenSurface, &pos);
             }
         }
     }

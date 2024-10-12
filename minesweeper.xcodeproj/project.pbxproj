@@ -37,15 +37,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C508CEC92CB597CA00DEAC6D /* one.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = one.bmp; sourceTree = "<group>"; };
-		C508CECA2CB597CA00DEAC6D /* eight.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = eight.bmp; sourceTree = "<group>"; };
-		C508CECB2CB597CA00DEAC6D /* three.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = three.bmp; sourceTree = "<group>"; };
 		C508CECC2CB597CA00DEAC6D /* empty.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = empty.bmp; sourceTree = "<group>"; };
-		C508CECD2CB597CA00DEAC6D /* two.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = two.bmp; sourceTree = "<group>"; };
-		C508CECE2CB597CA00DEAC6D /* five.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = five.bmp; sourceTree = "<group>"; };
-		C508CECF2CB597CA00DEAC6D /* four.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = four.bmp; sourceTree = "<group>"; };
-		C508CED02CB597CA00DEAC6D /* six.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = six.bmp; sourceTree = "<group>"; };
-		C508CED12CB597CA00DEAC6D /* seven.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = seven.bmp; sourceTree = "<group>"; };
+		C54106042CBA8660006B20F3 /* numberTile-1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-1.bmp"; sourceTree = "<group>"; };
+		C54106052CBA8660006B20F3 /* numberTile-2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-2.bmp"; sourceTree = "<group>"; };
+		C54106062CBA8660006B20F3 /* numberTile-3.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-3.bmp"; sourceTree = "<group>"; };
+		C54106072CBA8660006B20F3 /* numberTile-4.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-4.bmp"; sourceTree = "<group>"; };
+		C54106082CBA8660006B20F3 /* numberTile-5.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-5.bmp"; sourceTree = "<group>"; };
+		C54106092CBA8660006B20F3 /* numberTile-6.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-6.bmp"; sourceTree = "<group>"; };
+		C541060A2CBA8660006B20F3 /* numberTile-7.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-7.bmp"; sourceTree = "<group>"; };
+		C541060B2CBA8660006B20F3 /* numberTile-8.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-8.bmp"; sourceTree = "<group>"; };
 		C578A6412C96E19F006E315A /* grid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = grid.cpp; sourceTree = "<group>"; };
 		C578A6422C96E19F006E315A /* grid.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = grid.hpp; sourceTree = "<group>"; };
 		C5D2A2EB2CB4416500D0DB48 /* mine.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = mine.bmp; sourceTree = "<group>"; };
@@ -106,15 +106,15 @@
 		C5F27BE42C96C2CF007B3F57 /* media */ = {
 			isa = PBXGroup;
 			children = (
-				C508CECA2CB597CA00DEAC6D /* eight.bmp */,
+				C54106042CBA8660006B20F3 /* numberTile-1.bmp */,
+				C54106052CBA8660006B20F3 /* numberTile-2.bmp */,
+				C54106062CBA8660006B20F3 /* numberTile-3.bmp */,
+				C54106072CBA8660006B20F3 /* numberTile-4.bmp */,
+				C54106082CBA8660006B20F3 /* numberTile-5.bmp */,
+				C54106092CBA8660006B20F3 /* numberTile-6.bmp */,
+				C541060A2CBA8660006B20F3 /* numberTile-7.bmp */,
+				C541060B2CBA8660006B20F3 /* numberTile-8.bmp */,
 				C508CECC2CB597CA00DEAC6D /* empty.bmp */,
-				C508CECE2CB597CA00DEAC6D /* five.bmp */,
-				C508CECF2CB597CA00DEAC6D /* four.bmp */,
-				C508CEC92CB597CA00DEAC6D /* one.bmp */,
-				C508CED12CB597CA00DEAC6D /* seven.bmp */,
-				C508CED02CB597CA00DEAC6D /* six.bmp */,
-				C508CECB2CB597CA00DEAC6D /* three.bmp */,
-				C508CECD2CB597CA00DEAC6D /* two.bmp */,
 				C5D2A2EB2CB4416500D0DB48 /* mine.bmp */,
 				C5F27BE52C96C398007B3F57 /* tile.bmp */,
 			);
@@ -149,7 +149,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					C5F27BD42C96BEE1007B3F57 = {
 						CreatedOnToolsVersion = 15.4;
@@ -221,6 +221,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -245,7 +246,6 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -283,6 +283,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -300,7 +301,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
-				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -308,6 +308,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				"HEADER_SEARCH_PATHS[arch=*]" = /opt/homebrew/include/;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -322,6 +323,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				"HEADER_SEARCH_PATHS[arch=*]" = /opt/homebrew/include/;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

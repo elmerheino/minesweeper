@@ -60,7 +60,32 @@ void Grid::setTile(int row, int column, int value) {
 }
 
 int Grid::minesAround(int row, int column) {
-    return 0;
+    int mines_around = 0;
+    if (hasMine(row+1, column)) {
+        mines_around++;
+    }
+    if (hasMine(row, column+1)) {
+        mines_around++;
+    }
+    if (hasMine(row-1, column)) {
+        mines_around++;
+    }
+    if (hasMine(row, column-1)) {
+        mines_around++;
+    }
+    if (hasMine(row+1, column+1)) {
+        mines_around++;
+    }
+    if (hasMine(row-1, column-1)) {
+        mines_around++;
+    }
+    if (hasMine(row+1, column-1)) {
+        mines_around++;
+    }
+    if (hasMine(row-1, column+1)) {
+        mines_around++;
+    }
+    return mines_around;
 }
 
 bool Grid::withinRange(int row, int col) {
@@ -80,7 +105,7 @@ void Grid::revealTileRecursive(int row, int col) {
     if (hasMine(row, col)) { // If there is a mine, return
         return;
     } else { // Else, reveal the tiles around
-        setTile(row, col, 2);
+        setTile(row, col, 2+minesAround(row, col));
         revealTileRecursive(row-1, col); // Open the one above
         revealTileRecursive(row, col-1); // Open the one to the left
         revealTileRecursive(row+1, col);
