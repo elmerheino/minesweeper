@@ -56,7 +56,7 @@ bool Grid::hasMine(int row, int column) {
 }
 
 void Grid::setTile(int row, int column, int value) {
-    state.at(row*10+column) = value;
+    state.at(row*width+column) = value;
 }
 
 int Grid::minesAround(int row, int column) {
@@ -74,20 +74,21 @@ void Grid::revealTileRecursive(int row, int col) {
     if (!withinRange(row, col)) { // If out of range, return
         return;
     }
+    if (getTile(row, col) != 0) {
+        return;
+    }
     if (hasMine(row, col)) { // If there is a mine, return
         return;
     } else { // Else, reveal the tiles around
         setTile(row, col, 2);
         revealTileRecursive(row-1, col); // Open the one above
         revealTileRecursive(row, col-1); // Open the one to the left
-        revealTileRecursive(row-1, col-1);
-        // Somehow these lines cause segmentation fault
-        // revelTileRecursive(row+1, col);
-        // revelTileRecursive(row, col+1);
+        revealTileRecursive(row+1, col);
+        revealTileRecursive(row, col+1);
     }
 }
 
-bool Grid::revealTile(int row, int column) {
+bool Grid::revealTile(int row, int column) { // Returns true of there is a mine
     if (!withinRange(row, column)) {
         return false;
     }
@@ -96,7 +97,10 @@ bool Grid::revealTile(int row, int column) {
         return true;
     } else {
         setTile(row, column, 2+minesAround(row, column)); // TODO: make this recursive
-        revealTileRecursive(row, column);
+        revealTileRecursive(row-1, column); // Open the one above
+        revealTileRecursive(row, column-1); // Open the one to the left
+        revealTileRecursive(row+1, column); // Open the one below
+        revealTileRecursive(row, column+1); // Open the one to the right
     }
     return false;
 }

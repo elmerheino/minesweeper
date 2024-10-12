@@ -17,10 +17,6 @@ SDL_Surface* tile_empty = NULL; // Blank tile
 SDL_Surface* tile_mine = NULL;
 SDL_Surface* number_tiles[9];
 
-int state[10][10];
-bool opened[10][10];
-std::set<int> mines;
-
 bool init() {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         std::cout << "SDL could not initialize" << std::endl;
@@ -96,11 +92,10 @@ int main(int argc, const char * argv[]) {
         return 0;
     }
     
-    Grid grid(10,10,10);
+    Grid grid(10,10,50);
     
     // Place mines
     renderState(&grid);
-    // renderGrid(10, 10);
     SDL_UpdateWindowSurface(win);
     
     SDL_Event winEvent;
