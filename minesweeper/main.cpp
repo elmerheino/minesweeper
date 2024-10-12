@@ -18,12 +18,18 @@ SDL_Surface* tile_empty = NULL; // Blank tile
 SDL_Surface* tile_mine = NULL;
 SDL_Surface* number_tiles[9];
 
+int grid_width = 20;
+int grid_height = 20;
+
+int window_width = (grid_width/2)*50;
+int window_height = (grid_height/2)*50;
+
 bool init() {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         std::cout << "SDL could not initialize" << std::endl;
         return false;
     }
-    win = SDL_CreateWindow("Minesweeper", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 250, 250, SDL_WINDOW_ALLOW_HIGHDPI);
+    win = SDL_CreateWindow("Minesweeper", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, window_width, window_height, SDL_WINDOW_ALLOW_HIGHDPI);
     
     if (win == NULL) {
         return false;
@@ -59,8 +65,8 @@ bool loadMedia() {
 
 void renderState(Grid* g) {
     SDL_Rect pos = {0,0,50,50};
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
+    for (int i = 0; i < grid_width; i++) {
+        for (int j = 0; j < grid_height; j++) {
             pos = {i*50,j*50,50,50};
             switch (g->getTile(i,j)) {
                 case 0:
@@ -75,7 +81,7 @@ void renderState(Grid* g) {
                 default:
                     break;
             }
-            int tile_state = g->getTile(i,j) - 3;
+            int tile_state = g->getTile(i,j) - 2;
             if (tile_state <= 8 && tile_state >= 0) {
                 SDL_BlitSurface(number_tiles[tile_state], NULL, screenSurface, &pos);
             }
@@ -90,7 +96,7 @@ void close() {
 }
 
 std::pair<int, int> getTileLocationFromScreen(int x, int y){
-    std::pair<int, int> result(x*10/250, y*10/250);
+    std::pair<int, int> result(x*grid_width/window_width, y*grid_height/window_height);
     return result;
 }
 
@@ -104,7 +110,7 @@ int main(int argc, const char * argv[]) {
         return 0;
     }
     
-    Grid grid(10,10,50);
+    Grid grid(grid_width,grid_height,70);
     
     // Place mines
     renderState(&grid);

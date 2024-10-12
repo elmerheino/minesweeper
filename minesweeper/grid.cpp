@@ -9,7 +9,7 @@
 #include <iostream>
 #include <set>
 #include <vector>
-
+#include <format>
 
 Grid::Grid(int width_, int height_, int no_of_mines) {
     std::cout << "Initialized grid" << std::endl;
@@ -41,9 +41,10 @@ void Grid::prepareState() {
     for (int i = 0; i <= width; i++) {
         for (int j = 0; j <= height; j++) {
             state.push_back(0); // In the beginning all are unopened.
-            std::cout << i << " " << j << std::endl;
+            std::cout << std::format(" ({},{}) ", i, j);
         }
     }
+    std::cout << std::endl;
 }
 
 int Grid::getTile(int row, int column) {
@@ -99,18 +100,21 @@ void Grid::revealTileRecursive(int row, int col) {
     if (!withinRange(row, col)) { // If out of range, return
         return;
     }
-    if (getTile(row, col) != 0) {
+    if (getTile(row, col) != 0) { // If already visited, return
+        return;
+    }
+    if (minesAround(row, col) != 0) {
+        setTile(row, col, 2+minesAround(row, col));
         return;
     }
     if (hasMine(row, col)) { // If there is a mine, return
         return;
-    } else { // Else, reveal the tiles around
-        setTile(row, col, 2+minesAround(row, col));
-        revealTileRecursive(row-1, col); // Open the one above
-        revealTileRecursive(row, col-1); // Open the one to the left
-        revealTileRecursive(row+1, col);
-        revealTileRecursive(row, col+1);
     }
+    setTile(row, col, 2+minesAround(row, col));
+    revealTileRecursive(row-1, col); // Open the one above
+    revealTileRecursive(row, col-1); // Open the one to the left
+    revealTileRecursive(row+1, col);
+    revealTileRecursive(row, col+1);
 }
 
 bool Grid::revealTile(int row, int column) { // Returns true of there is a mine
@@ -121,7 +125,9 @@ bool Grid::revealTile(int row, int column) { // Returns true of there is a mine
         setTile(row, column, 1);
         return true;
     } else {
-        setTile(row, column, 2+minesAround(row, column)); // TODO: make this recursive
+        int mines_around_here = minesAround(row, column);
+        setTile(row, column, 2+mines_around_here);
+        // Start the recursion
         revealTileRecursive(row-1, column); // Open the one above
         revealTileRecursive(row, column-1); // Open the one to the left
         revealTileRecursive(row+1, column); // Open the one below
