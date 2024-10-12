@@ -48,16 +48,16 @@ void Grid::prepareState() {
 }
 
 int Grid::getTile(int row, int column) {
-    return state.at(row*width+column);
+    return state.at(column*width+row);
 }
 
 bool Grid::hasMine(int row, int column) {
-    bool res = mines.contains(row*width+column);
+    bool res = mines.contains(column*width+row);
     return res;
 }
 
 void Grid::setTile(int row, int column, int value) {
-    state.at(row*width+column) = value;
+    state.at(column*width+row) = value;
 }
 
 int Grid::minesAround(int row, int column) {

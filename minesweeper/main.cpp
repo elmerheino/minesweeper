@@ -19,7 +19,7 @@ SDL_Surface* tile_mine = NULL;
 SDL_Surface* number_tiles[9];
 
 int grid_width = 20;
-int grid_height = 20;
+int grid_height = 10;
 
 int window_width = (grid_width/2)*50;
 int window_height = (grid_height/2)*50;

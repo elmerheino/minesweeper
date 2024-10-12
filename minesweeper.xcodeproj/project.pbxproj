@@ -46,6 +46,7 @@
 		C54106092CBA8660006B20F3 /* numberTile-6.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-6.bmp"; sourceTree = "<group>"; };
 		C541060A2CBA8660006B20F3 /* numberTile-7.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-7.bmp"; sourceTree = "<group>"; };
 		C541060B2CBA8660006B20F3 /* numberTile-8.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-8.bmp"; sourceTree = "<group>"; };
+		C541060C2CBA9759006B20F3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		C578A6412C96E19F006E315A /* grid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = grid.cpp; sourceTree = "<group>"; };
 		C578A6422C96E19F006E315A /* grid.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = grid.hpp; sourceTree = "<group>"; };
 		C5D2A2EB2CB4416500D0DB48 /* mine.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = mine.bmp; sourceTree = "<group>"; };
@@ -87,6 +88,7 @@
 		C5F27BD72C96BEE1007B3F57 /* minesweeper */ = {
 			isa = PBXGroup;
 			children = (
+				C541060C2CBA9759006B20F3 /* README.md */,
 				C5F27BE42C96C2CF007B3F57 /* media */,
 				C5F27BD82C96BEE1007B3F57 /* main.cpp */,
 				C578A6412C96E19F006E315A /* grid.cpp */,
