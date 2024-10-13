@@ -145,3 +145,13 @@ void Grid::revealAllMines() {
         }
     }
 }
+
+void Grid::insertFlag(int row, int column) {
+    setTile(row, column, 20);
+    flags.insert(column*width+row);
+}
+
+bool Grid::isGameWon() {
+    // Compare the set of mines and flags. If they're equal, the game has been won.
+    return mines == flags;
+}

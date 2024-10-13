@@ -50,6 +50,7 @@
 		C578A6412C96E19F006E315A /* grid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = grid.cpp; sourceTree = "<group>"; };
 		C578A6422C96E19F006E315A /* grid.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = grid.hpp; sourceTree = "<group>"; };
 		C5D2A2EB2CB4416500D0DB48 /* mine.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = mine.bmp; sourceTree = "<group>"; };
+		C5D58A262CBB93B500940BAB /* flag.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = flag.bmp; sourceTree = "<group>"; };
 		C5F27BD52C96BEE1007B3F57 /* minesweeper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = minesweeper; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F27BD82C96BEE1007B3F57 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C5F27BE02C96C17A007B3F57 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../opt/homebrew/Cellar/sdl2/2.30.7/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
@@ -108,6 +109,7 @@
 		C5F27BE42C96C2CF007B3F57 /* media */ = {
 			isa = PBXGroup;
 			children = (
+				C5D58A262CBB93B500940BAB /* flag.bmp */,
 				C54106042CBA8660006B20F3 /* numberTile-1.bmp */,
 				C54106052CBA8660006B20F3 /* numberTile-2.bmp */,
 				C54106062CBA8660006B20F3 /* numberTile-3.bmp */,

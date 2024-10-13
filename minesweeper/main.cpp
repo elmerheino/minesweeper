@@ -17,6 +17,7 @@ SDL_Surface* tile_closed = NULL;
 SDL_Surface* tile_empty = NULL; // Blank tile
 SDL_Surface* tile_mine = NULL;
 SDL_Surface* number_tiles[9];
+SDL_Surface* tile_flag = NULL;
 
 int grid_width = 30;
 int grid_height = 20;
@@ -49,6 +50,7 @@ bool loadMedia() {
     tile_closed = SDL_LoadBMP("media/tile.bmp");
     tile_mine = SDL_LoadBMP("media/mine.bmp");
     tile_empty = SDL_LoadBMP("media/empty.bmp");
+    tile_flag = SDL_LoadBMP("media/flag.bmp");
     
     for (int i = 1; i <= 8; i++) {
         std::string path = std::format("media/numberTile-{}.bmp",i);
@@ -59,7 +61,7 @@ bool loadMedia() {
         }
     }
     
-    if (tile_closed == NULL || tile_mine == NULL || tile_empty == NULL) {
+    if (tile_closed == NULL || tile_mine == NULL || tile_empty == NULL || tile_flag == NULL) {
         return false;
     }
     return true;
@@ -79,6 +81,10 @@ void renderState(Grid* g) {
                     break;
                 case 2:
                     SDL_BlitSurface(tile_empty, NULL, screenSurface, &pos);
+                    break;
+                case 20:
+                    // Render a flag.
+                    SDL_BlitSurface(tile_flag, NULL, screenSurface, &pos);
                     break;
                 default:
                     break;
@@ -112,7 +118,7 @@ int main(int argc, const char * argv[]) {
         return 0;
     }
     
-    Grid grid(grid_width,grid_height,70);
+    Grid grid(grid_width,grid_height,2);
     
     // Place mines
     renderState(&grid);
@@ -130,21 +136,34 @@ int main(int argc, const char * argv[]) {
                 int y = winEvent.button.y;
                 int tile_x = getTileLocationFromScreen(x,y).first;
                 int tile_y = getTileLocationFromScreen(x,y).second;
-                                
-                if (!game_over && grid.revealTile(tile_x, tile_y)) {
-                    // Game over
-                    std::cout << "Game over !!!" << std::endl;
-                    game_over = true;
-                    grid.revealAllMines();
+
+                if (winEvent.button.button == SDL_BUTTON_LEFT) {
+                    if (!game_over && grid.revealTile(tile_x, tile_y)) {
+                        // Game over
+                        std::cout << "Game over !!!" << std::endl;
+                        game_over = true;
+                        grid.revealAllMines();
+                        renderState(&grid);
+                        SDL_UpdateWindowSurface(win);
+                    }
                     renderState(&grid);
                     SDL_UpdateWindowSurface(win);
+                    
+                    std::cout << "Mouse button down at: " << x << " " << y << std::endl;
+                    std::cout << tile_x << " " << tile_y << std::endl;
+                    std::cout << "There is a type of tile: " << grid.getTile(tile_x, tile_y) << std::endl;
+
+                } else if (winEvent.button.button == SDL_BUTTON_RIGHT) {
+                    // Add a flag
+                    grid.insertFlag(tile_x, tile_y);
+                    renderState(&grid);
+                    SDL_UpdateWindowSurface(win);
+                    
+                    if (!game_over && grid.isGameWon()) {
+                        game_over = true;
+                        std::cout << "You won, all the mines have been flagged" << std::endl;
+                    }
                 }
-                renderState(&grid);
-                SDL_UpdateWindowSurface(win);
-                
-                std::cout << "Mouse button down at: " << x << " " << y << std::endl;
-                std::cout << tile_x << " " << tile_y << std::endl;
-                std::cout << "There is a type of tile: " << grid.getTile(tile_x, tile_y) << std::endl;
             }
         }
     }
