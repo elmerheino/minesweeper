@@ -10,15 +10,16 @@
 #include <set>
 #include <vector>
 #include <format>
+#include <SDL2/SDL.h>
 
 Grid::Grid(int width_, int height_, int no_of_mines) {
-    std::cout << "Initialized grid" << std::endl;
     width = width_;
     height = height_;
     // Place mines
     placeMines(no_of_mines);
     // Prepare the state
     prepareState();
+    std::cout << "Initialized grid" << std::endl;
 }
 
 void Grid::placeMines(int no_of_mines) {
@@ -41,7 +42,7 @@ void Grid::prepareState() {
     for (int i = 0; i <= width; i++) {
         for (int j = 0; j <= height; j++) {
             state.push_back(0); // In the beginning all are unopened.
-            std::cout << std::format(" ({},{}) ", i, j);
+            // std::cout << std::format(" ({},{}) ", i, j);
         }
     }
     std::cout << std::endl;
@@ -154,4 +155,56 @@ void Grid::insertFlag(int row, int column) {
 bool Grid::isGameWon() {
     // Compare the set of mines and flags. If they're equal, the game has been won.
     return mines == flags;
+}
+
+void Grid::render(SDL_Surface* screen) {
+    SDL_Rect pos = {0,0,50,50};
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            pos = {i*50,j*50,50,50};
+            switch (getTile(i,j)) {
+                case 0:
+                    SDL_BlitSurface(tile_closed, NULL, screen, &pos);
+                    break;
+                case 1:
+                    SDL_BlitSurface(tile_mine, NULL, screen, &pos);
+                    break;
+                case 2:
+                    SDL_BlitSurface(tile_empty, NULL, screen, &pos);
+                    break;
+                case 20:
+                    // Render a flag.
+                    SDL_BlitSurface(tile_flag, NULL, screen, &pos);
+                    break;
+                default:
+                    break;
+            }
+            int tile_state = getTile(i,j) - 2;
+            if (tile_state <= 8 && tile_state >= 1) {
+                SDL_BlitSurface(number_tiles[tile_state], NULL, screen, &pos);
+            }
+        }
+    }
+
+}
+
+bool Grid::load_graphics() {
+    tile_closed = SDL_LoadBMP("media/tile.bmp");
+    tile_mine = SDL_LoadBMP("media/mine.bmp");
+    tile_empty = SDL_LoadBMP("media/empty.bmp");
+    tile_flag = SDL_LoadBMP("media/flag.bmp");
+    
+    for (int i = 1; i <= 8; i++) {
+        std::string path = std::format("media/numberTile-{}.bmp",i);
+        std::cout << "Loading file: " << path << std::endl;
+        number_tiles[i] = SDL_LoadBMP(path.c_str());
+        if (number_tiles[i] == NULL) {
+            return false;
+        }
+    }
+    
+    if (tile_closed == NULL || tile_mine == NULL || tile_empty == NULL || tile_flag == NULL) {
+        return false;
+    }
+    return true;
 }

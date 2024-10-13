@@ -46,57 +46,6 @@ bool init() {
     return true;
 };
 
-bool loadMedia() {
-    tile_closed = SDL_LoadBMP("media/tile.bmp");
-    tile_mine = SDL_LoadBMP("media/mine.bmp");
-    tile_empty = SDL_LoadBMP("media/empty.bmp");
-    tile_flag = SDL_LoadBMP("media/flag.bmp");
-    
-    for (int i = 1; i <= 8; i++) {
-        std::string path = std::format("media/numberTile-{}.bmp",i);
-        std::cout << "Loading file: " << path << std::endl;
-        number_tiles[i] = SDL_LoadBMP(path.c_str());
-        if (number_tiles[i] == NULL) {
-            return false;
-        }
-    }
-    
-    if (tile_closed == NULL || tile_mine == NULL || tile_empty == NULL || tile_flag == NULL) {
-        return false;
-    }
-    return true;
-}
-
-void renderState(Grid* g) {
-    SDL_Rect pos = {0,0,50,50};
-    for (int i = 0; i < grid_width; i++) {
-        for (int j = 0; j < grid_height; j++) {
-            pos = {i*50,j*50,50,50};
-            switch (g->getTile(i,j)) {
-                case 0:
-                    SDL_BlitSurface(tile_closed, NULL, screenSurface, &pos);
-                    break;
-                case 1:
-                    SDL_BlitSurface(tile_mine, NULL, screenSurface, &pos);
-                    break;
-                case 2:
-                    SDL_BlitSurface(tile_empty, NULL, screenSurface, &pos);
-                    break;
-                case 20:
-                    // Render a flag.
-                    SDL_BlitSurface(tile_flag, NULL, screenSurface, &pos);
-                    break;
-                default:
-                    break;
-            }
-            int tile_state = g->getTile(i,j) - 2;
-            if (tile_state <= 8 && tile_state >= 0) {
-                SDL_BlitSurface(number_tiles[tile_state], NULL, screenSurface, &pos);
-            }
-        }
-    }
-}
-
 void close() {
     SDL_FreeSurface(screenSurface);
     SDL_DestroyWindow(win);
@@ -111,17 +60,15 @@ std::pair<int, int> getTileLocationFromScreen(int x, int y){
 int main(int argc, const char * argv[]) {
     // insert code here...
     init();
+    Grid grid(grid_width,grid_height,2);
     
-    if (!loadMedia()) {
+    if (!grid.load_graphics()) {
         std::cout << "Problem loading media." << std::endl;
         close();
         return 0;
     }
     
-    Grid grid(grid_width,grid_height,2);
-    
-    // Place mines
-    renderState(&grid);
+    grid.render(screenSurface);
     SDL_UpdateWindowSurface(win);
     
     SDL_Event winEvent;
@@ -143,20 +90,18 @@ int main(int argc, const char * argv[]) {
                         std::cout << "Game over !!!" << std::endl;
                         game_over = true;
                         grid.revealAllMines();
-                        renderState(&grid);
-                        SDL_UpdateWindowSurface(win);
                     }
-                    renderState(&grid);
+                    grid.render(screenSurface);
                     SDL_UpdateWindowSurface(win);
                     
-                    std::cout << "Mouse button down at: " << x << " " << y << std::endl;
-                    std::cout << tile_x << " " << tile_y << std::endl;
-                    std::cout << "There is a type of tile: " << grid.getTile(tile_x, tile_y) << std::endl;
+                    // std::cout << "Mouse button down at: " << x << " " << y << std::endl;
+                    // std::cout << tile_x << " " << tile_y << std::endl;
+                    // std::cout << "There is a type of tile: " << grid.getTile(tile_x, tile_y) << std::endl;
 
                 } else if (winEvent.button.button == SDL_BUTTON_RIGHT) {
                     // Add a flag
                     grid.insertFlag(tile_x, tile_y);
-                    renderState(&grid);
+                    grid.render(screenSurface);
                     SDL_UpdateWindowSurface(win);
                     
                     if (!game_over && grid.isGameWon()) {
