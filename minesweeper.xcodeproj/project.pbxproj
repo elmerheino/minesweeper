@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C578A6432C96E19F006E315A /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C578A6412C96E19F006E315A /* grid.cpp */; };
+		C5C2A8B62D0C8D5200D7FD64 /* gameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5C2A8B52D0C8D4400D7FD64 /* gameOver.cpp */; };
 		C5F27BD92C96BEE1007B3F57 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5F27BD82C96BEE1007B3F57 /* main.cpp */; };
 		C5F27BE12C96C17A007B3F57 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F27BE02C96C17A007B3F57 /* libSDL2-2.0.0.dylib */; };
 		C5F27BE22C96C17A007B3F57 /* libSDL2-2.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = C5F27BE02C96C17A007B3F57 /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -37,6 +38,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C50284772D0D7D12000ACFB6 /* gameover.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = gameover.bmp; sourceTree = "<group>"; };
 		C508CECC2CB597CA00DEAC6D /* empty.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = empty.bmp; sourceTree = "<group>"; };
 		C54106042CBA8660006B20F3 /* numberTile-1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-1.bmp"; sourceTree = "<group>"; };
 		C54106052CBA8660006B20F3 /* numberTile-2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "numberTile-2.bmp"; sourceTree = "<group>"; };
@@ -49,6 +51,8 @@
 		C541060C2CBA9759006B20F3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		C578A6412C96E19F006E315A /* grid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = grid.cpp; sourceTree = "<group>"; };
 		C578A6422C96E19F006E315A /* grid.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = grid.hpp; sourceTree = "<group>"; };
+		C5C2A8B52D0C8D4400D7FD64 /* gameOver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameOver.cpp; sourceTree = "<group>"; };
+		C5C2A8B82D0C8D8800D7FD64 /* gameOver.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameOver.hpp; sourceTree = "<group>"; };
 		C5D2A2EB2CB4416500D0DB48 /* mine.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = mine.bmp; sourceTree = "<group>"; };
 		C5D58A262CBB93B500940BAB /* flag.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = flag.bmp; sourceTree = "<group>"; };
 		C5F27BD52C96BEE1007B3F57 /* minesweeper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = minesweeper; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +93,8 @@
 		C5F27BD72C96BEE1007B3F57 /* minesweeper */ = {
 			isa = PBXGroup;
 			children = (
+				C5C2A8B52D0C8D4400D7FD64 /* gameOver.cpp */,
+				C5C2A8B82D0C8D8800D7FD64 /* gameOver.hpp */,
 				C541060C2CBA9759006B20F3 /* README.md */,
 				C5F27BE42C96C2CF007B3F57 /* media */,
 				C5F27BD82C96BEE1007B3F57 /* main.cpp */,
@@ -109,6 +115,7 @@
 		C5F27BE42C96C2CF007B3F57 /* media */ = {
 			isa = PBXGroup;
 			children = (
+				C50284772D0D7D12000ACFB6 /* gameover.bmp */,
 				C5D58A262CBB93B500940BAB /* flag.bmp */,
 				C54106042CBA8660006B20F3 /* numberTile-1.bmp */,
 				C54106052CBA8660006B20F3 /* numberTile-2.bmp */,
@@ -185,6 +192,7 @@
 			files = (
 				C5F27BD92C96BEE1007B3F57 /* main.cpp in Sources */,
 				C578A6432C96E19F006E315A /* grid.cpp in Sources */,
+				C5C2A8B62D0C8D5200D7FD64 /* gameOver.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

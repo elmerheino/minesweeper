@@ -10,6 +10,7 @@
 #include <set>
 #include "grid.hpp"
 #include <format>
+#include "gameOver.hpp"
 
 SDL_Window *win = NULL;
 SDL_Surface* screenSurface = NULL;
@@ -20,7 +21,7 @@ SDL_Surface* number_tiles[9];
 SDL_Surface* tile_flag = NULL;
 
 int grid_width = 30;
-int grid_height = 20;
+int grid_height = 30;
 
 int window_width = (grid_width/2)*50;
 int window_height = (grid_height/2)*50;
@@ -60,8 +61,17 @@ std::pair<int, int> getTileLocationFromScreen(int x, int y){
 int main(int argc, const char * argv[]) {
     // insert code here...
     init();
-    Grid grid(grid_width,grid_height,2);
+    Grid grid(grid_width,grid_height,100);
+    gameOver gameOverScreen;
     
+    
+    
+    if (!gameOverScreen.load_graphics()) {
+        std::cout << "Problem loading game over screen media." << std::endl;
+        close();
+        return 0;
+    }
+
     if (!grid.load_graphics()) {
         std::cout << "Problem loading media." << std::endl;
         close();
@@ -91,7 +101,11 @@ int main(int argc, const char * argv[]) {
                         game_over = true;
                         grid.revealAllMines();
                     }
+                    
                     grid.render(screenSurface);
+                    if (game_over) {
+                        gameOverScreen.render(screenSurface);
+                    }
                     SDL_UpdateWindowSurface(win);
                     
                     // std::cout << "Mouse button down at: " << x << " " << y << std::endl;
