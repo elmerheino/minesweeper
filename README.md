@@ -6,3 +6,10 @@ the whole area without hitting a mine. This is an implementation in object orien
 The project implements graphics, input handling, and game logic. Game logic uses a flood fill based algirithm
 for path searching and mine detection.
 
+## Screenshots
+
+<p align="center">
+	<img src="img/img1.png" alt="Minesweeper screenshot 1" width="31%" />
+	<img src="img/img2.png" alt="Minesweeper screenshot 2" width="31%" />
+	<img src="img/img3.png" alt="Minesweeper screenshot 3" width="31%" />
+</p>
