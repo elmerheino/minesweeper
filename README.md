@@ -5,3 +5,4 @@ the whole area without hitting a mine. This is an implementation in object orien
 
 The project implements graphics, input handling, and game logic. Game logic uses a flood fill based algirithm
 for path searching and mine detection.
+
