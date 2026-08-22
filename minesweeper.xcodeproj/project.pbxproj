@@ -57,7 +57,7 @@
 		C5D58A262CBB93B500940BAB /* flag.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = flag.bmp; sourceTree = "<group>"; };
 		C5F27BD52C96BEE1007B3F57 /* minesweeper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = minesweeper; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F27BD82C96BEE1007B3F57 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		C5F27BE02C96C17A007B3F57 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../opt/homebrew/Cellar/sdl2/2.30.7/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
+		C5F27BE02C96C17A007B3F57 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "/opt/homebrew/lib/libSDL2-2.0.0.dylib"; sourceTree = "<absolute>"; };
 		C5F27BE52C96C398007B3F57 /* tile.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = tile.bmp; path = minesweeper/media/tile.bmp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -160,7 +160,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					C5F27BD42C96BEE1007B3F57 = {
 						CreatedOnToolsVersion = 15.4;
@@ -258,6 +258,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
 			name = Debug;
 		};
@@ -313,20 +314,22 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
 			name = Release;
 		};
 		C5F27BDD2C96BEE1007B3F57 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
-				"HEADER_SEARCH_PATHS[arch=*]" = /opt/homebrew/include/;
+				"HEADER_SEARCH_PATHS[arch=*]" = /opt/homebrew/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/homebrew/Cellar/sdl2/2.30.7/lib,
+					/opt/homebrew/lib,
 				);
-				"LIBRARY_SEARCH_PATHS[arch=*]" = /opt/homebrew/Cellar/sdl2/2.30.7/lib;
+				"LIBRARY_SEARCH_PATHS[arch=*]" = /opt/homebrew/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -334,14 +337,15 @@
 		C5F27BDE2C96BEE1007B3F57 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
-				"HEADER_SEARCH_PATHS[arch=*]" = /opt/homebrew/include/;
+				"HEADER_SEARCH_PATHS[arch=*]" = /opt/homebrew/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/homebrew/Cellar/sdl2/2.30.7/lib,
+					/opt/homebrew/lib,
 				);
-				"LIBRARY_SEARCH_PATHS[arch=*]" = /opt/homebrew/Cellar/sdl2/2.30.7/lib;
+				"LIBRARY_SEARCH_PATHS[arch=*]" = /opt/homebrew/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -356,7 +360,7 @@
 				C5F27BDB2C96BEE1007B3F57 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		C5F27BDC2C96BEE1007B3F57 /* Build configuration list for PBXNativeTarget "minesweeper" */ = {
 			isa = XCConfigurationList;
@@ -365,7 +369,7 @@
 				C5F27BDE2C96BEE1007B3F57 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

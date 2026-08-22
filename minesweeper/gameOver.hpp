@@ -5,6 +5,9 @@
 //  Created by Elmer Heino on 13.12.2024.
 //
 
+#ifndef gameOver_hpp
+#define gameOver_hpp
+
 #include <stdio.h>
 #include <set>
 #include <vector>
@@ -20,3 +23,5 @@ public:
     void render(SDL_Surface* screen);
     bool load_graphics();
 };
+
+#endif /* gameOver_hpp */
