@@ -22,3 +22,8 @@ open minesweeper.xcodeproj
 	<img src="img/img2.png" alt="Minesweeper screenshot 2" width="31%" />
 	<img src="img/img3.png" alt="Minesweeper screenshot 3" width="31%" />
 </p>
+
+## Possible next steps
+
+Enable the user to switch between grid sizes according to their preference instead of using fixed 
+constants.
